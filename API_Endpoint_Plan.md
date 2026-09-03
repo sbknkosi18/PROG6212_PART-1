@@ -46,3 +46,24 @@
 | GET | /events/{eventId}/enrolments | Get all enrolments for an event | Organiser only | None | 200 OK - Array of enrolment objects with participant details <br> 403 Forbidden - Insufficient permissions <br> 404 Not Found - Event not found |
 | POST | /events/{eventId}/enrol | Enrol a participant in an event category | Participant only | { "categoryId" } | 201 Created - Enrolment object <br> 400 Bad Request - Already enrolled or category full <br> 403 Forbidden - Insufficient permissions <br> 404 Not Found - Event or category not found |
 | DELETE | /enrolments/{id} | Cancel an enrolment | Participant (own) or Organiser | None | 204 No Content - Enrolment cancelled <br> 403 Forbidden - Insufficient permissions <br> 404 Not Found - Enrolment not found |
+
+## Results Endpoints
+
+| HTTP Method | Route | Description | Role Required | Request Body | Expected Response |
+|-------------|-------|-------------|---------------|--------------|-------------------|
+| GET | /events/{eventId}/results | Get all results for an event | Any (Logged In) | None | 200 OK - Array of result objects with rankings <br> 404 Not Found - Event not found |
+| GET | /enrolments/{id}/result | Get specific result for an enrolment | Any (Logged In) | None | 200 OK - Result object <br> 404 Not Found - Result not found |
+| GET | /participants/{id}/results | Get all results for a specific participant | Participant (own) or Organiser | None | 200 OK - Array of result objects <br> 403 Forbidden - Insufficient permissions <br> 404 Not Found - Participant not found |
+| POST | /enrolments/{id}/result | Capture a result for an enrolment | Organiser only | { "time", "position" } | 201 Created - Result object <br> 400 Bad Request - Validation errors <br> 403 Forbidden - Insufficient permissions <br> 404 Not Found - Enrolment not found |
+| PUT | /results/{id} | Update a result | Organiser only | { "time", "position" } | 200 OK - Updated result object <br> 400 Bad Request - Validation errors <br> 403 Forbidden - Insufficient permissions <br> 404 Not Found - Result not found |
+
+## HTTP Status Codes Used
+- **200 OK**: Successful GET, PUT requests
+- **201 Created**: Successful POST requests
+- **204 No Content**: Successful DELETE requests
+- **400 Bad Request**: Validation errors, malformed requests
+- **401 Unauthorized**: Not authenticated
+- **403 Forbidden**: Insufficient permissions
+- **404 Not Found**: Resource not found
+- **409 Conflict**: Resource conflict (e.g., already enrolled)
+- **500 Internal Server Error**: Server-side errors
