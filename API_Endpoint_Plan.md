@@ -27,3 +27,22 @@
 | POST | /events | Create a new event | Organiser only | { "name", "description", "date", "location", "maxParticipants" } | 201 Created - Created event object <br> 400 Bad Request - Validation errors <br> 403 Forbidden - Insufficient permissions |
 | PUT | /events/{id} | Update an existing event | Organiser only | { "name", "description", "date", "location", "maxParticipants" } | 200 OK - Updated event object <br> 400 Bad Request - Validation errors <br> 403 Forbidden - Insufficient permissions <br> 404 Not Found - Event not found |
 | DELETE | /events/{id} | Delete an event | Organiser only | None | 204 No Content - Event deleted <br> 403 Forbidden - Insufficient permissions <br> 404 Not Found - Event not found |
+
+## Category Endpoints
+
+| HTTP Method | Route | Description | Role Required | Request Body | Expected Response |
+|-------------|-------|-------------|---------------|--------------|-------------------|
+| GET | /events/{eventId}/categories | Get all categories for an event | Any (Logged In) | None | 200 OK - Array of category objects <br> 404 Not Found - Event not found |
+| GET | /categories/{id} | Get a specific category by ID | Any (Logged In) | None | 200 OK - Category object <br> 404 Not Found - Category not found |
+| POST | /events/{eventId}/categories | Create a new category for an event | Organiser only | { "name", "description", "distance", "fee" } | 201 Created - Created category object <br> 400 Bad Request - Validation errors <br> 403 Forbidden - Insufficient permissions <br> 404 Not Found - Event not found |
+| PUT | /categories/{id} | Update a category | Organiser only | { "name", "description", "distance", "fee" } | 200 OK - Updated category object <br> 400 Bad Request - Validation errors <br> 403 Forbidden - Insufficient permissions <br> 404 Not Found - Category not found |
+| DELETE | /categories/{id} | Delete a category | Organiser only | None | 204 No Content - Category deleted <br> 403 Forbidden - Insufficient permissions <br> 404 Not Found - Category not found |
+
+## Enrolment Endpoints
+
+| HTTP Method | Route | Description | Role Required | Request Body | Expected Response |
+|-------------|-------|-------------|---------------|--------------|-------------------|
+| GET | /enrolments | Get current user's enrolments | Any (Logged In) | None | 200 OK - Array of enrolment objects <br> 401 Unauthorized - Not authenticated |
+| GET | /events/{eventId}/enrolments | Get all enrolments for an event | Organiser only | None | 200 OK - Array of enrolment objects with participant details <br> 403 Forbidden - Insufficient permissions <br> 404 Not Found - Event not found |
+| POST | /events/{eventId}/enrol | Enrol a participant in an event category | Participant only | { "categoryId" } | 201 Created - Enrolment object <br> 400 Bad Request - Already enrolled or category full <br> 403 Forbidden - Insufficient permissions <br> 404 Not Found - Event or category not found |
+| DELETE | /enrolments/{id} | Cancel an enrolment | Participant (own) or Organiser | None | 204 No Content - Enrolment cancelled <br> 403 Forbidden - Insufficient permissions <br> 404 Not Found - Enrolment not found |
