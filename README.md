@@ -17,3 +17,12 @@ Browse upcoming events
 Enter an event by selecting a category
 View their own enrolments
 Track personal results and performance history
+
+## Technology Stack
+**Backend**: ASP.NET Core 8.0 Web API
+**Frontend**: ASP.NET Core MVC
+**Database**: SQL Server
+**Authentication**: JWT
+**Cloud**: Azure Blob Storage (for Part 3)
+**Containerization**: Docker (for Part 3)
+**CI/CD**: GitHub Actions
