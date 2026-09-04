@@ -47,22 +47,22 @@ jobs:
     
     - name: Check SQL script exists
       run: |
-        if [ ! -f "docs/Database_Script.sql" ]; then
-          echo "Error: Database_Script.sql not found"
+        if [ ! -f "docs/RaceDayDB.sql" ]; then
+          echo "Error: RaceDayDB.sql not found"
           exit 1
         fi
-        echo "✓ Database_Script.sql exists"
+        echo "✓ RaceDayDB.sql exists"
 
         - name: Verify SQL script syntax (basic check)
       run: |
-        if grep -i "CREATE TABLE" docs/Database_Script.sql; then
+        if grep -i "CREATE TABLE" docs/RaceDayDB.sql; then
           echo "✓ CREATE TABLE statements found"
         else
           echo "Error: No CREATE TABLE statements found"
           exit 1
         fi
         
-        if grep -i "INSERT INTO" docs/Database_Script.sql; then
+        if grep -i "INSERT INTO" docs/RaceDayDB.sql; then
           echo "✓ INSERT statements found"
         else
           echo "Error: No INSERT statements found"
