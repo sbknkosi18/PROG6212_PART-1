@@ -1,0 +1,54 @@
+name: Validate Documentation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Check docs folder exists
+      run: |
+        if [ ! -d "docs" ]; then
+          echo "Error: docs folder not found"
+          exit 1
+        fi
+        echo "✓ docs folder exists"
+
+         - name: Check README.md exists
+      run: |
+        if [ ! -f "docs/README.md" ]; then
+          echo "Error: README.md not found in docs"
+          exit 1
+        fi
+        echo "✓ README.md exists"
+    
+    - name: Check ERD image exists
+      run: |
+        if [ ! -f "docs/ERD.png" ] && [ ! -f "docs/ERD.pdf" ]; then
+          echo "Error: ERD file not found (PNG or PDF)"
+          exit 1
+        fi
+        echo "✓ ERD file exists"
+    
+    - name: Check API Endpoint Plan exists
+      run: |
+        if [ ! -f "docs/API_Endpoint_Plan.md" ]; then
+          echo "Error: API_Endpoint_Plan.md not found"
+          exit 1
+        fi
+        echo "✓ API_Endpoint_Plan.md exists"
+    
+    - name: Check SQL script exists
+      run: |
+        if [ ! -f "docs/Database_Script.sql" ]; then
+          echo "Error: Database_Script.sql not found"
+          exit 1
+        fi
+        echo "✓ Database_Script.sql exists"
