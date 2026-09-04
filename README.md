@@ -26,3 +26,6 @@ Track personal results and performance history
 **Cloud**: Azure Blob Storage (for Part 3)
 **Containerization**: Docker (for Part 3)
 **CI/CD**: GitHub Actions
+
+## Video Presentation
+[YouTube Video Link - Part 1 System Planning](https://youtu.be/r0_s1KlybTw)
