@@ -52,3 +52,24 @@ jobs:
           exit 1
         fi
         echo "✓ Database_Script.sql exists"
+
+        - name: Verify SQL script syntax (basic check)
+      run: |
+        if grep -i "CREATE TABLE" docs/Database_Script.sql; then
+          echo "✓ CREATE TABLE statements found"
+        else
+          echo "Error: No CREATE TABLE statements found"
+          exit 1
+        fi
+        
+        if grep -i "INSERT INTO" docs/Database_Script.sql; then
+          echo "✓ INSERT statements found"
+        else
+          echo "Error: No INSERT statements found"
+          exit 1
+        fi
+    
+    - name: Success
+      run: |
+        echo "✅ All validation checks passed!"
+        echo "📁 Documentation is complete and ready for Part 2"
